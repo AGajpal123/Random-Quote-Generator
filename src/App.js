@@ -23,6 +23,18 @@ class App extends React.Component {
         });
     }
 
+
+    fetchAdviceById = () => {
+        axios.get("https://api.adviceslip.com/advice/"+(Math.floor(Math.random() * 225))).then((response) => {
+            const { advice } = response.data.slip;
+            this.setState({
+                advice
+            });
+        }).catch((error) => {
+            console.log(error);
+        })
+    }
+
     //run exactly after render of our component
     componentDidMount() {
         this.fetchAdvice();
@@ -36,7 +48,7 @@ class App extends React.Component {
                     <h1 className="heading">
                         {advice}
                     </h1>
-                    <button className="button" onClick={this.fetchAdvice}>
+                    <button className="button" onClick={this.fetchAdviceById}>
                         <span>
                             GIVE ME ADVICE!
                         </span>
